@@ -57,10 +57,10 @@ public class Rental {
 		// duplication
 		if (getStatus() == 1) { // returned Video, status = magic number
 			long diff = returnDate.getTime() - rentDate.getTime();
-			daysRented = (int) (diff / (1000 * 60 * 60 * 24)) + 1;
+			daysRented = getDaysRented(diff);
 		} else { // not yet returned
 			long diff = new Date().getTime() - rentDate.getTime();
-			daysRented = (int) (diff / (1000 * 60 * 60 * 24)) + 1;
+			daysRented = getDaysRented(diff);
 		}
 		if ( daysRented <= 2) return limit ;
 		// type 정리
@@ -70,5 +70,11 @@ public class Rental {
 			case Video.DVD: limit = 2 ; break ;
 		}
 		return limit ;
+	}
+
+	private int getDaysRented(long diff) {
+		int daysRented;
+		daysRented = (int) (diff / (1000 * 60 * 60 * 24)) + 1;
+		return daysRented;
 	}
 }
