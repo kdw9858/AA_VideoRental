@@ -55,6 +55,7 @@ public class VRService {
     }
 
     public void listVidos() {
+        // TODO: return string
         for ( Video video: videos ) {
             System.out.println("Price code: " + video.getPriceCode() +"\tTitle: " + video.getTitle()) ;
         }
@@ -62,6 +63,7 @@ public class VRService {
     }
 
     public void listCustomers() {
+        // TODO: return string
         for ( Customer customer: customers ) {
             System.out.println("Name: " + customer.getName() +
                     "\tRentals: " + customer.getRentals().size()) ;
