@@ -17,11 +17,6 @@ public class Rental {
 		return video;
 	}
 
-	// dead code
-	public void setVideo(Video video) {
-		this.video = video;
-	}
-
 	public int getStatus() {
 		return status;
 	}
@@ -36,18 +31,8 @@ public class Rental {
 		return rentDate;
 	}
 
-	// dead code
-	public void setRentDate(Date rentDate) {
-		this.rentDate = rentDate;
-	}
-
 	public Date getReturnDate() {
 		return returnDate;
-	}
-
-	// dead code
-	public void setReturnDate(Date returnDate) {
-		this.returnDate = returnDate;
 	}
 
 	// Feature Envy
@@ -79,15 +64,23 @@ public class Rental {
 	}
 
 	public int getDaysRented(Rental each) {
-		int daysRented = 0;
-		// duplication
+		long diff = getDiff(each);
+		return getRented(diff);
+	}
+
+	private long getDiff(Rental each) {
+		long diff;
 		if (each.getStatus() == 1) { // returned Video
-			long diff = each.getReturnDate().getTime() - each.getRentDate().getTime();
-			daysRented = (int) (diff / (1000 * 60 * 60 * 24)) + 1;
+			diff = each.getReturnDate().getTime() - each.getRentDate().getTime();
 		} else { // not yet returned
-			long diff = new Date().getTime() - each.getRentDate().getTime();
-			daysRented = (int) (diff / (1000 * 60 * 60 * 24)) + 1;
+			diff = new Date().getTime() - each.getRentDate().getTime();
 		}
+		return diff;
+	}
+
+	private int getRented(long diff) {
+		int daysRented;
+		daysRented = (int) (diff / (1000 * 60 * 60 * 24)) + 1;
 		return daysRented;
 	}
 
